@@ -3,8 +3,11 @@ package lalou.jonathan.personnalBrainTrain;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class HelloAndroidActivity extends Activity {
+    private ImageButton imageButton;
 
     private static String TAG = "personnalBrainTrain";
 
@@ -19,7 +22,13 @@ public class HelloAndroidActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
-        setContentView(R.layout.main);
+        setContentView(R.layout.welcome);
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                setContentView(R.layout.main);
+            }
+        });
     }
 
 }
