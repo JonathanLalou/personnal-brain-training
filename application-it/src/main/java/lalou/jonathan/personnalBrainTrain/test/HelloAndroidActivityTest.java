@@ -1,16 +1,16 @@
 package lalou.jonathan.personnalBrainTrain.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import lalou.jonathan.personnalBrainTrain.HelloAndroidActivity;
+import lalou.jonathan.personnalBrainTrain.WelcomeActivity;
 
-public class HelloAndroidActivityTest extends ActivityInstrumentationTestCase2<HelloAndroidActivity> {
+public class HelloAndroidActivityTest extends ActivityInstrumentationTestCase2<WelcomeActivity> {
 
     public HelloAndroidActivityTest() {
-        super(HelloAndroidActivity.class);
+        super(WelcomeActivity.class);
     }
 
     public void testActivity() {
-        HelloAndroidActivity activity = getActivity();
+        WelcomeActivity activity = getActivity();
         assertNotNull(activity);
     }
 }

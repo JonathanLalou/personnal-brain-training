@@ -5,6 +5,7 @@
               android:layout_height="fill_parent"
         >
     <TextView
+            android:id="@+id/question"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/question"
@@ -16,17 +17,17 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/answer0"
+                android:id="@+id/button0" android:layout_gravity="center"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/answer1"
-                android:id="@+id/button" android:layout_gravity="center"/>
+                android:id="@+id/button1" android:layout_gravity="center"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/answer2"
-                android:id="@+id/button" android:layout_gravity="center"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/answer3"
-                android:id="@+id/button" android:layout_gravity="center"/>
+                android:id="@+id/button2" android:layout_gravity="center"/>
     </LinearLayout>
 </LinearLayout>

@@ -9,9 +9,22 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
-            android:id="@id/button" android:layout_gravity="center|right" android:focusable="true"/>
+            android:id="@id/textView" android:layout_gravity="center|right" android:focusable="true"/>
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@id/imageButton" android:layout_gravity="center" android:src="@drawable/icon"/>
+            android:id="@id/imageButton" android:layout_gravity="center" android:src="@drawable/icon"
+            android:contentDescription="none"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@id/timeAttack" android:layout_gravity="center"
+            android:text="@string/TimeAttack"
+            android:contentDescription="none"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@id/timeAttack" android:layout_gravity="center"
+            android:text="@string/survival"
+            android:contentDescription="none"/>
 </LinearLayout>

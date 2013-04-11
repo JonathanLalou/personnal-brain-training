@@ -2,8 +2,10 @@
 <resources>
     <string name="question">This is a question</string>
     <string name="app_name">personnalBrainTrain</string>
-    <string name="answer1">answer1</string>
-    <string name="answer2">answer2</string>
-    <string name="answer3">answer3</string>
+    <string name="answer0">answer1</string>
+    <string name="answer1">answer2</string>
+    <string name="answer2">answer3</string>
     <string name="welcome">welcome</string>
+    <string name="TimeAttack">TimeAttack!!</string>
+    <string name="survival">survival</string>
 </resources>
