@@ -1,8 +1,11 @@
 package lalou.jonathan.personnalBrainTrain;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,6 +35,37 @@ public class HelloAndroidActivity extends Activity {
                 startActivityForResult(intent, 0);
             }
         });
+        printContactList();
+    }
+
+    private void printContactList() {
+        final ContentResolver cr;
+        final Cursor cur;
+        cr = getContentResolver();
+        cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+        if (cur.getCount() > 0) {
+            while (cur.moveToNext()) {
+                String id = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+                    final Cursor pCur;
+                    pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[]{id}, null);
+                    Log.i(TAG, "*** Contact: " + name);
+                    while (pCur.moveToNext()) {
+                        final String phoneNumber;
+                        phoneNumber = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        Log.i(TAG, "Contact: " + name + ", phone: " + phoneNumber);
+                    }
+                    pCur.close();
+                }
+            }
+        }
     }
 
 }
