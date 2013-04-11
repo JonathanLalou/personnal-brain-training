@@ -25,7 +25,7 @@ public class QuestionActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         final Map<String, String> namesAndPhones;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.question);
 
         namesAndPhones = extractNamesAndPhoneNumbers();
         final List<String> names;
