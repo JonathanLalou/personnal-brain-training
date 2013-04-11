@@ -1,6 +1,7 @@
 package lalou.jonathan.personnalBrainTrain;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +27,9 @@ public class HelloAndroidActivity extends Activity {
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                setContentView(R.layout.main);
+                final Intent intent;
+                intent = new Intent(view.getContext(), QuestionActivity.class);
+                startActivityForResult(intent, 0);
             }
         });
     }
