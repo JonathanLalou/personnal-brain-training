@@ -1,4 +1,4 @@
-package lalou.jonathan.personnalBrainTrain;
+package lalou.jonathan.personnalBrainTrain.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import lalou.jonathan.personnalBrainTrain.R;
 
 public class WelcomeActivity extends Activity {
     private ImageButton imageButton;

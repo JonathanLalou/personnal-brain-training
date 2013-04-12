@@ -1,19 +1,21 @@
-package lalou.jonathan.personnalBrainTrain;
+package lalou.jonathan.personnalBrainTrain.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import lalou.jonathan.personnalBrainTrain.R;
+import lalou.jonathan.personnalBrainTrain.business.PersonnalBrainTrainBusiness;
+import lalou.jonathan.personnalBrainTrain.business.logic.PersonnalBrainTrainBusinessLogic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA "Leda" 12 CE.
@@ -24,12 +26,15 @@ import java.util.*;
 public class QuestionActivity extends Activity {
     private static String TAG = "personnalBrainTrain";
 
+    private PersonnalBrainTrainBusiness personnalBrainTrainBusiness;
+
     public void onCreate(Bundle savedInstanceState) {
         final Map<String, String> namesAndPhones;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question);
+        personnalBrainTrainBusiness = new PersonnalBrainTrainBusinessLogic(getContentResolver());
 
-        namesAndPhones = extractNamesAndPhoneNumbers();
+        namesAndPhones = personnalBrainTrainBusiness.extractNamesAndPhoneNumbers();
         final List<String> names;
         names = new ArrayList<String>(namesAndPhones.keySet()).subList(0, 3);
         final String goodAnswer = names.get(0);
@@ -57,53 +62,11 @@ public class QuestionActivity extends Activity {
         textView.setText("Whom does the number " + phoneNumber + " belong to?");
     }
 
-    /**
-     * gets a map of names and phone numbers
-     *
-     * @return
-     */
-    private Map<String, String> extractNamesAndPhoneNumbers() {
-        // keys: names; values: phone number
-        // TODO should be a Map<String, List<String>>
-        final Map<String, String> answer;
-        final ContentResolver cr;
-        final Cursor cur;
-
-        answer = new HashMap<String, String>();
-
-        cr = getContentResolver();
-        cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-        if (cur.getCount() > 0) {
-            while (cur.moveToNext()) {
-                String id = cur.getString(
-                        cur.getColumnIndex(ContactsContract.Contacts._ID));
-                String name = cur.getString(
-                        cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-                    final Cursor pCur;
-                    pCur = cr.query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                            new String[]{id}, null);
-                    Log.i(TAG, "*** Contact: " + name);
-                    while (pCur.moveToNext()) {
-                        final String phoneNumber;
-                        phoneNumber = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        Log.i(TAG, "Contact: " + name + ", phone: " + phoneNumber);
-                        answer.put(name, phoneNumber);
-                    }
-                    pCur.close();
-                }
-            }
-        }
-        return answer;
-    }
 
     private void displayAlertOK() {
         AlertDialog alertDialog = new AlertDialog.Builder(QuestionActivity.this).create();
         // Setting Dialog Title
-        alertDialog.setTitle("Alert Dialog");
+        alertDialog.setTitle("Good answer!");
         // Setting Dialog Message
         alertDialog.setMessage("You win!");
         // Setting Icon to Dialog

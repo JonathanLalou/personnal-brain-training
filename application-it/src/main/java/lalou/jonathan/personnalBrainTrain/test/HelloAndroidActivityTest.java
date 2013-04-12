@@ -1,7 +1,7 @@
 package lalou.jonathan.personnalBrainTrain.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import lalou.jonathan.personnalBrainTrain.WelcomeActivity;
+import lalou.jonathan.personnalBrainTrain.activity.WelcomeActivity;
 
 public class HelloAndroidActivityTest extends ActivityInstrumentationTestCase2<WelcomeActivity> {
 
