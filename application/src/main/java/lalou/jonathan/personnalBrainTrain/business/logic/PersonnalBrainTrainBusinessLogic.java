@@ -32,12 +32,12 @@ public class PersonnalBrainTrainBusinessLogic implements PersonnalBrainTrainBusi
         // keys: names; values: phone number
         // TODO should be a Map<String, List<String>>
         final Map<String, String> answer;
-        final ContentResolver cr;
         final Cursor cur;
 
         answer = new HashMap<String, String>();
 
-        cur = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+        // XXX check if possible to replace "RANDOM()" with "RANDOM() LIMIT 3"
+        cur = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, "RANDOM() LIMIT 3");
         if (cur.getCount() > 0) {
             while (cur.moveToNext()) {
                 String id = cur.getString(
@@ -62,6 +62,7 @@ public class PersonnalBrainTrainBusinessLogic implements PersonnalBrainTrainBusi
                 }
             }
         }
+
         return answer;
     }
 

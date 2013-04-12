@@ -36,9 +36,10 @@ public class QuestionActivity extends Activity {
 
         namesAndPhones = personnalBrainTrainBusiness.extractNamesAndPhoneNumbers();
         final List<String> names;
-        names = new ArrayList<String>(namesAndPhones.keySet()).subList(0, 3);
+        names = new ArrayList<String>(namesAndPhones.keySet());
         final String goodAnswer = names.get(0);
         final String phoneNumber = namesAndPhones.get(goodAnswer);
+        // FIXME change algorithm: as for now, only the 3 first elements will be got and shuffled
         Collections.shuffle(names);
         // TODO use a random access rather than magic numbers
         final Button[] buttons = new Button[]{
@@ -53,6 +54,8 @@ public class QuestionActivity extends Activity {
                 public void onClick(View v) {
                     if (button.getText().equals(goodAnswer)) {
                         displayAlertOK();
+                    } else {
+                        displayAlertKO();
                     }
                 }
             });
@@ -72,10 +75,27 @@ public class QuestionActivity extends Activity {
         // Setting Icon to Dialog
         alertDialog.setIcon(R.drawable.icon);
         // Setting OK Button
-        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Write your code here to execute after dialog closed
                 Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    private void displayAlertKO() {
+        AlertDialog alertDialog = new AlertDialog.Builder(QuestionActivity.this).create();
+        // Setting Dialog Title
+        alertDialog.setTitle("Bad answer!");
+        // Setting Dialog Message
+        alertDialog.setMessage("You lose!");
+        // Setting Icon to Dialog
+        alertDialog.setIcon(R.drawable.icon);
+        // Setting OK Button
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "KO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
             }
         });
         // Showing Alert Message
