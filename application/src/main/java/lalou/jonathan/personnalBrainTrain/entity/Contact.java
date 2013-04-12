@@ -9,6 +9,9 @@ import java.io.Serializable;
  * Time: 09:21
  */
 public class Contact implements Serializable {
+    // XXX check type
+    private String id;
+
     private String name;
 
     //    TODO to be replaced with
@@ -25,6 +28,14 @@ public class Contact implements Serializable {
     private String birthday;
 
     public Contact() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

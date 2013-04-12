@@ -1,5 +1,8 @@
 package lalou.jonathan.personnalBrainTrain.business;
 
+import lalou.jonathan.personnalBrainTrain.entity.Contact;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,4 +13,6 @@ import java.util.Map;
  */
 public interface PersonnalBrainTrainBusiness {
     Map<String, String> extractNamesAndPhoneNumbers();
+
+    List<Contact> getContacts();
 }

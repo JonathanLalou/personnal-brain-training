@@ -11,11 +11,10 @@ import android.widget.Toast;
 import lalou.jonathan.personnalBrainTrain.R;
 import lalou.jonathan.personnalBrainTrain.business.PersonnalBrainTrainBusiness;
 import lalou.jonathan.personnalBrainTrain.business.logic.PersonnalBrainTrainBusinessLogic;
+import lalou.jonathan.personnalBrainTrain.entity.Contact;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA "Leda" 12 CE.
@@ -29,19 +28,18 @@ public class QuestionActivity extends Activity {
     private PersonnalBrainTrainBusiness personnalBrainTrainBusiness;
 
     public void onCreate(Bundle savedInstanceState) {
-        final Map<String, String> namesAndPhones;
+        final List<Contact> contacts;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question);
+
         personnalBrainTrainBusiness = new PersonnalBrainTrainBusinessLogic(getContentResolver());
 
-        namesAndPhones = personnalBrainTrainBusiness.extractNamesAndPhoneNumbers();
-        final List<String> names;
-        names = new ArrayList<String>(namesAndPhones.keySet());
-        final String goodAnswer = names.get(0);
-        final String phoneNumber = namesAndPhones.get(goodAnswer);
-        // FIXME change algorithm: as for now, only the 3 first elements will be got and shuffled
-        Collections.shuffle(names);
-        // TODO use a random access rather than magic numbers
+        contacts = personnalBrainTrainBusiness.getContacts();
+        Collections.shuffle(contacts);
+        final Contact goodAnswer;
+        // TODO case when there are less than 3 answers
+        goodAnswer = contacts.get(0);
+
         final Button[] buttons = new Button[]{
                 (Button) findViewById(R.id.button0),
                 (Button) findViewById(R.id.button1),
@@ -49,10 +47,10 @@ public class QuestionActivity extends Activity {
         };
         for (int i = 0; i < 3; i++) {
             final Button button = buttons[i];
-            button.setText(names.get(i));
+            button.setText(contacts.get(i).getName());
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    if (button.getText().equals(goodAnswer)) {
+                    if (button.getText().equals(goodAnswer.getName())) {
                         displayAlertOK();
                     } else {
                         displayAlertKO();
@@ -62,9 +60,8 @@ public class QuestionActivity extends Activity {
         }
 
         final TextView textView = (TextView) findViewById(R.id.question);
-        textView.setText("Whom does the number " + phoneNumber + " belong to?");
+        textView.setText("Whom does the number " + goodAnswer.getPhoneNumber() + " belong to?");
     }
-
 
     private void displayAlertOK() {
         AlertDialog alertDialog = new AlertDialog.Builder(QuestionActivity.this).create();

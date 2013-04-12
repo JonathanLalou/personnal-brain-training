@@ -9,7 +9,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>lalou.jonathan</groupId>
     <artifactId>personnalBrainTrain</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>apk</packaging>
@@ -20,6 +19,11 @@
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
         </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.android</groupId>-->
+        <!--<artifactId>spring-android-core</artifactId>-->
+        <!--<version>1.0.1.RELEASE</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

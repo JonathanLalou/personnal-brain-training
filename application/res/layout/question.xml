@@ -29,5 +29,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/answer2"
                 android:id="@+id/button2" android:layout_gravity="center"/>
+        <Chronometer
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chronometer" android:layout_gravity="right|center_vertical"/>
     </LinearLayout>
 </LinearLayout>
