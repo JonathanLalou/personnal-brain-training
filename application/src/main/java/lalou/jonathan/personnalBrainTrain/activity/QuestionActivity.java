@@ -35,10 +35,10 @@ public class QuestionActivity extends Activity {
         personnalBrainTrainBusiness = new PersonnalBrainTrainBusinessLogic(getContentResolver());
 
         contacts = personnalBrainTrainBusiness.getContacts();
-        Collections.shuffle(contacts);
         final Contact goodAnswer;
         // TODO case when there are less than 3 answers
         goodAnswer = contacts.get(0);
+        Collections.shuffle(contacts);
 
         final Button[] buttons = new Button[]{
                 (Button) findViewById(R.id.button0),
