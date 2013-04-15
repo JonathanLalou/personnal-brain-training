@@ -9,4 +9,5 @@
     <string name="TimeAttack">TimeAttack!!</string>
     <string name="survival">survival</string>
     <string name="editableText">editableText</string>
+    <string name="score">score</string>
 </resources>

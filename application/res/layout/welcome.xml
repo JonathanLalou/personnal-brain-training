@@ -24,7 +24,7 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@id/timeAttack" android:layout_gravity="center"
+            android:id="@id/survival" android:layout_gravity="center"
             android:text="@string/survival"
             android:contentDescription="none"/>
 </LinearLayout>

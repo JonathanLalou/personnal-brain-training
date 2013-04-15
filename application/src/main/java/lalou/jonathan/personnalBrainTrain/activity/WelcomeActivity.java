@@ -5,11 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import lalou.jonathan.personnalBrainTrain.R;
+import lalou.jonathan.personnalBrainTrain.application.PersonnalBrainTrainApplication;
+import lalou.jonathan.personnalBrainTrain.application.StateMemento;
 
 public class WelcomeActivity extends Activity {
-    private ImageButton imageButton;
+    private ImageButton questionImageButton;
+    private Button survivalButton;
+
+    private PersonnalBrainTrainApplication application;
+    private StateMemento stateMemento;
 
     private static String TAG = "personnalBrainTrain";
 
@@ -25,14 +32,25 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
         setContentView(R.layout.welcome);
-        imageButton = (ImageButton) findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+
+        questionImageButton = (ImageButton) findViewById(R.id.imageButton);
+        questionImageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 final Intent intent;
                 intent = new Intent(view.getContext(), QuestionActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
+
+        survivalButton = (Button) findViewById(R.id.survival);
+        survivalButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                final Intent intent;
+                intent = new Intent(view.getContext(), SurvivalActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+//        getApplication()
     }
 
 }

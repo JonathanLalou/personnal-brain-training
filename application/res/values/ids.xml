@@ -3,4 +3,5 @@
     <item name="imageButton" type="id"/>
     <item name="textView" type="id">textView</item>
     <item name="timeAttack" type="id">timeAttack</item>
+    <item name="survival" type="id">survival</item>
 </resources>
