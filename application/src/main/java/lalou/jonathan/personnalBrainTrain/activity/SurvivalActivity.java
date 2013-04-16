@@ -76,13 +76,9 @@ public class SurvivalActivity extends Activity {
                         displayAlertOK();
                         stateMemento.incrementScore();
                         textView.setText("Score: " + stateMemento.getScore());
-//                            final Intent intent;
-//                            intent = new Intent(view.getContext(), SurvivalActivity.class);
-//                            startActivityForResult(intent, SURVIVAL_ACTIVITY_CODE);
                         displayQuestion();
                     } else {
                         Log.i(TAG, "---- Bad answer! ----");
-//                        displayAlertKO();
                         setResult(9999);
                         finish();
                     }

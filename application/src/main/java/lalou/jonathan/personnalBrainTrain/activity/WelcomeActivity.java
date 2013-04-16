@@ -52,16 +52,15 @@ public class WelcomeActivity extends Activity {
                 startActivityForResult(intent, WELCOME_ACTIVITY_CODE);
             }
         });
-//        getApplication()
+        application = (PersonnalBrainTrainApplication) getApplication();
+        stateMemento = application.getStateMemento();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == WELCOME_ACTIVITY_CODE) {
-//            Log.i(TAG, "(welcome)++++++++ " + requestCode + ", " + resultCode + ", " + data.toString());
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle("Your score: " + resultCode);
+            adb.setTitle("Your score: " + stateMemento.getScore());
             adb.setPositiveButton("Ok", null);
             adb.show();
         } else {
