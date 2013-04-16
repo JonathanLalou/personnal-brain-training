@@ -1,6 +1,7 @@
 package lalou.jonathan.personnalBrainTrain.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import lalou.jonathan.personnalBrainTrain.application.PersonnalBrainTrainApplica
 import lalou.jonathan.personnalBrainTrain.application.StateMemento;
 
 public class WelcomeActivity extends Activity {
+    public static final Integer WELCOME_ACTIVITY_CODE = 541321;
     private ImageButton questionImageButton;
     private Button survivalButton;
 
@@ -38,7 +40,7 @@ public class WelcomeActivity extends Activity {
             public void onClick(View view) {
                 final Intent intent;
                 intent = new Intent(view.getContext(), QuestionActivity.class);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, WELCOME_ACTIVITY_CODE);
             }
         });
 
@@ -47,11 +49,24 @@ public class WelcomeActivity extends Activity {
             public void onClick(View view) {
                 final Intent intent;
                 intent = new Intent(view.getContext(), SurvivalActivity.class);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, WELCOME_ACTIVITY_CODE);
             }
         });
 //        getApplication()
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == WELCOME_ACTIVITY_CODE) {
+//            Log.i(TAG, "(welcome)++++++++ " + requestCode + ", " + resultCode + ", " + data.toString());
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
+            adb.setTitle("Your score: " + resultCode);
+            adb.setPositiveButton("Ok", null);
+            adb.show();
+        } else {
+            Log.i(TAG, "(welcome)++++++++ There may be an issue anywhere... :-/");
+        }
+    }
 }
 

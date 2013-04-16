@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import static lalou.jonathan.personnalBrainTrain.application.PlayMode.survival;
  * Time: 18:48
  */
 public class SurvivalActivity extends Activity {
+    public static final Integer SURVIVAL_ACTIVITY_CODE = 95196;
     private static String TAG = "personnalBrainTrain";
     private PersonnalBrainTrainApplication application;
     private StateMemento stateMemento;
@@ -45,6 +47,12 @@ public class SurvivalActivity extends Activity {
         stateMemento = application.getStateMemento();
         stateMemento.setPlayMode(survival);
 
+        displayQuestion();
+    }
+
+    private void displayQuestion() {
+        // FIXME very ugly
+        final List<Contact> contacts;
         contacts = personnalBrainTrainBusiness.getContacts();
         final Contact goodAnswer;
         goodAnswer = contacts.get(0);
@@ -68,18 +76,22 @@ public class SurvivalActivity extends Activity {
                         displayAlertOK();
                         stateMemento.incrementScore();
                         textView.setText("Score: " + stateMemento.getScore());
-                        final Intent intent;
-                        intent = new Intent(view.getContext(), SurvivalActivity.class);
-                        startActivityForResult(intent, 0);
+//                            final Intent intent;
+//                            intent = new Intent(view.getContext(), SurvivalActivity.class);
+//                            startActivityForResult(intent, SURVIVAL_ACTIVITY_CODE);
+                        displayQuestion();
                     } else {
-                        displayAlertKO();
+                        Log.i(TAG, "---- Bad answer! ----");
+//                        displayAlertKO();
+                        setResult(9999);
+                        finish();
                     }
                 }
             });
         }
-
         final TextView questionTextView = (TextView) findViewById(R.id.question);
         questionTextView.setText("Whom does the number " + goodAnswer.getPhoneNumber() + " belong to?");
+
     }
 
     private void displayAlertOK() {
@@ -116,6 +128,17 @@ public class SurvivalActivity extends Activity {
         });
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG, "(survival)++++++++ " + requestCode + ", " + resultCode + ", " + data.toString());
+        // if the requestCode is the code of the current activity, then propagate it recursively
+        // (because for the moment an Activity is created for each question - this should be fixed)
+        if (SURVIVAL_ACTIVITY_CODE.equals(requestCode)) {
+            setResult(resultCode);
+        }
     }
 
 

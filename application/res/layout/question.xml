@@ -36,5 +36,4 @@
                 android:text="@string/score"
                 />
     </LinearLayout>
-
 </LinearLayout>
