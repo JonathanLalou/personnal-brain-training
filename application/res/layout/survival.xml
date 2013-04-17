@@ -4,37 +4,5 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
         >
-    <TextView
-            android:id="@+id/question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/question"
-            />
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/answer0"
-                android:id="@+id/button0" android:layout_gravity="center"/>
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/answer1"
-                android:id="@+id/button1" android:layout_gravity="center"/>
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/answer2"
-                android:id="@+id/button2" android:layout_gravity="center"/>
-        <TextView
-                android:id="@+id/score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/score"
-                />
-    </LinearLayout>
-
+    <include layout="@layout/question"/>
 </LinearLayout>
