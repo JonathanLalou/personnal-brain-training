@@ -24,6 +24,12 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@id/countdownTextView" android:layout_gravity="center"
+            android:text="@string/countdown"
+            android:contentDescription="none"/>
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@id/survival" android:layout_gravity="center"
             android:text="@string/survival"
             android:contentDescription="none"/>

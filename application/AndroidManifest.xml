@@ -13,6 +13,7 @@
         </activity>
         <activity android:name=".activity.QuestionActivity"/>
         <activity android:name=".activity.SurvivalActivity"/>
+        <activity android:name=".activity.CountdownActivity"/>
     </application>
 
 </manifest>

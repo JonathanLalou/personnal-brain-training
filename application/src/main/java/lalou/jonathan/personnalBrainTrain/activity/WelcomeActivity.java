@@ -15,7 +15,6 @@ import lalou.jonathan.personnalBrainTrain.application.StateMemento;
 public class WelcomeActivity extends Activity {
     public static final Integer WELCOME_ACTIVITY_CODE = 541321;
     private ImageButton questionImageButton;
-    private Button survivalButton;
 
     private PersonnalBrainTrainApplication application;
     private StateMemento stateMemento;
@@ -43,6 +42,8 @@ public class WelcomeActivity extends Activity {
                 startActivityForResult(intent, WELCOME_ACTIVITY_CODE);
             }
         });
+        final Button survivalButton;
+        final Button countdownButton;
 
         survivalButton = (Button) findViewById(R.id.survival);
         survivalButton.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +53,16 @@ public class WelcomeActivity extends Activity {
                 startActivityForResult(intent, WELCOME_ACTIVITY_CODE);
             }
         });
+
+        countdownButton = (Button) findViewById(R.id.countdownTextView);
+        countdownButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                final Intent intent;
+                intent = new Intent(view.getContext(), CountdownActivity.class);
+                startActivityForResult(intent, WELCOME_ACTIVITY_CODE);
+            }
+        });
+
         application = (PersonnalBrainTrainApplication) getApplication();
         stateMemento = application.getStateMemento();
     }
@@ -60,7 +71,15 @@ public class WelcomeActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == WELCOME_ACTIVITY_CODE) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle("You've lost... ");
+            switch (stateMemento.getPlayMode()) {
+                case survival:
+                    adb.setTitle("You've lost... ");
+                    break;
+                case countdown:
+                    adb.setTitle("Countdown is over... ");
+                case timeAttack:
+                case training:
+            }
             adb.setMessage("Your score: " + stateMemento.getScore());
             adb.setPositiveButton("Ok", null);
             adb.show();

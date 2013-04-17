@@ -7,5 +7,5 @@ package lalou.jonathan.personnalBrainTrain.application;
  * Time: 18:47
  */
 public enum PlayMode {
-    timeAttack, training, survival;
+    timeAttack, training, survival, countdown;
 }
