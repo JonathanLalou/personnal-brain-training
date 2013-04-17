@@ -1,17 +1,11 @@
 package lalou.jonathan.personnalBrainTrain.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 import lalou.jonathan.personnalBrainTrain.R;
@@ -77,14 +71,13 @@ public class SurvivalActivity extends Activity {
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     if (button.getText().equals(goodAnswer.getName())) {
-//                        displayAlertOK();
-//                        showAddTextPopup();
                         stateMemento.incrementScore();
                         Toast.makeText(getApplicationContext(), "Good!", Toast.LENGTH_SHORT).show();
                         textView.setText("Score: " + stateMemento.getScore());
                         displayQuestion();
                     } else {
                         Log.i(TAG, "---- Bad answer! ----");
+                        Toast.makeText(getApplicationContext(), "Fail...", Toast.LENGTH_SHORT).show();
                         setResult(9999);
                         finish();
                     }
@@ -94,65 +87,6 @@ public class SurvivalActivity extends Activity {
         final TextView questionTextView = (TextView) findViewById(R.id.question);
         questionTextView.setText("Whom does the number " + goodAnswer.getPhoneNumber() + " belong to?");
 
-    }
-
-    private void showAddTextPopup() {
-        final LayoutInflater inflater;// .getSystemService // (Context.LAYOUT_INFLATER_SERVICE);
-        final PopupWindow window1;
-
-        window1 = new PopupWindow(this);
-        window1.setWidth(500);
-        window1.setHeight(300);
-        window1.setTouchable(true);
-        window1.setFocusable(true);
-        inflater = this.getLayoutInflater();
-        View bottomView = inflater.inflate(R.layout.shortmessage, null);
-        window1.setContentView(bottomView);
-        window1.showAtLocation(bottomView, Gravity.CENTER_VERTICAL, 50, 50);
-        final Handler handler;
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                window1.dismiss();
-            }
-        }, 500);
-    }
-
-    private void displayAlertOK() {
-        AlertDialog alertDialog = new AlertDialog.Builder(SurvivalActivity.this).create();
-        // Setting Dialog Title
-        alertDialog.setTitle("Good answer!");
-        // Setting Dialog Message
-        alertDialog.setMessage("You win!");
-        // Setting Icon to Dialog
-        alertDialog.setIcon(R.drawable.icon);
-        // Setting OK Button
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // Write your code here to execute after dialog closed
-                Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-            }
-        });
-        // Showing Alert Message
-        alertDialog.show();
-        alertDialog.hide();
-    }
-
-    private void displayAlertKO() {
-        AlertDialog alertDialog = new AlertDialog.Builder(SurvivalActivity.this).create();
-        // Setting Dialog Title
-        alertDialog.setTitle("Bad answer!");
-        // Setting Dialog Message
-        alertDialog.setMessage("You lose!");
-        // Setting Icon to Dialog
-        alertDialog.setIcon(R.drawable.icon);
-        // Setting OK Button
-        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "KO", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        // Showing Alert Message
-        alertDialog.show();
     }
 
     @Override

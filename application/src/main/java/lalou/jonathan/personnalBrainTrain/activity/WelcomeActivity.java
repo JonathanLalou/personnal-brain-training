@@ -60,7 +60,8 @@ public class WelcomeActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == WELCOME_ACTIVITY_CODE) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle("Your score: " + stateMemento.getScore());
+            adb.setTitle("You've lost... ");
+            adb.setMessage("Your score: " + stateMemento.getScore());
             adb.setPositiveButton("Ok", null);
             adb.show();
             stateMemento.reset();
