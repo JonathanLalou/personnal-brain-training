@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 import lalou.jonathan.personnalBrainTrain.R;
@@ -73,8 +77,10 @@ public class SurvivalActivity extends Activity {
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     if (button.getText().equals(goodAnswer.getName())) {
-                        displayAlertOK();
+//                        displayAlertOK();
+//                        showAddTextPopup();
                         stateMemento.incrementScore();
+                        Toast.makeText(getApplicationContext(), "Good!", Toast.LENGTH_SHORT).show();
                         textView.setText("Score: " + stateMemento.getScore());
                         displayQuestion();
                     } else {
@@ -88,6 +94,28 @@ public class SurvivalActivity extends Activity {
         final TextView questionTextView = (TextView) findViewById(R.id.question);
         questionTextView.setText("Whom does the number " + goodAnswer.getPhoneNumber() + " belong to?");
 
+    }
+
+    private void showAddTextPopup() {
+        final LayoutInflater inflater;// .getSystemService // (Context.LAYOUT_INFLATER_SERVICE);
+        final PopupWindow window1;
+
+        window1 = new PopupWindow(this);
+        window1.setWidth(500);
+        window1.setHeight(300);
+        window1.setTouchable(true);
+        window1.setFocusable(true);
+        inflater = this.getLayoutInflater();
+        View bottomView = inflater.inflate(R.layout.shortmessage, null);
+        window1.setContentView(bottomView);
+        window1.showAtLocation(bottomView, Gravity.CENTER_VERTICAL, 50, 50);
+        final Handler handler;
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                window1.dismiss();
+            }
+        }, 500);
     }
 
     private void displayAlertOK() {
@@ -107,6 +135,7 @@ public class SurvivalActivity extends Activity {
         });
         // Showing Alert Message
         alertDialog.show();
+        alertDialog.hide();
     }
 
     private void displayAlertKO() {

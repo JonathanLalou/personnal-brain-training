@@ -9,10 +9,11 @@ import java.io.Serializable;
  * Time: 18:46
  */
 public class StateMemento implements Serializable {
-    private Integer score = 0;
-    private PlayMode playMode = null;
+    private Integer score;
+    private PlayMode playMode;
 
     public StateMemento() {
+        reset();
     }
 
     public void incrementScore() {
@@ -33,5 +34,10 @@ public class StateMemento implements Serializable {
 
     public void setPlayMode(PlayMode playMode) {
         this.playMode = playMode;
+    }
+
+    public void reset() {
+        score = 0;
+        playMode = null;
     }
 }

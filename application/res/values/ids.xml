@@ -4,4 +4,5 @@
     <item name="textView" type="id">textView</item>
     <item name="timeAttack" type="id">timeAttack</item>
     <item name="survival" type="id">survival</item>
+    <item name="autopopup" type="id">autopopup</item>
 </resources>

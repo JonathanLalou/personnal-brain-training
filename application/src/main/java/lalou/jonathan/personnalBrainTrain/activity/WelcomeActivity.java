@@ -63,8 +63,9 @@ public class WelcomeActivity extends Activity {
             adb.setTitle("Your score: " + stateMemento.getScore());
             adb.setPositiveButton("Ok", null);
             adb.show();
+            stateMemento.reset();
         } else {
-            Log.i(TAG, "(welcome)++++++++ There may be an issue anywhere... :-/");
+            Log.e(TAG, "(welcome)++++++++ There may be an issue anywhere... :-/");
         }
     }
 }
